@@ -18,11 +18,14 @@ def place_symbol(board, pos, symb):
     if type(board[(pos-1)//3][(pos%3)-1]) == int: #checks for type at position 
         board[(pos-1)//3][(pos%3)-1] = symb #converts 1-9 position into array coordinates and replaces with player symbol 
     else:
-        print("you cheated, start over") 
+
+        print("This box is taken!")
         return board, False 
     return board, True
 
-#create board and define player symbol. Converts lowercase symbol into uppercase
+
+# Create board and define player symbol. Converts lowercase symbol into uppercase
+
 board = [[1,2,3],[4,5,6],[7,8,9]] 
 print ("",board[0],"\n",board[1],"\n",board[2])
 won = False
@@ -32,7 +35,9 @@ if player1 == "X":
     player2 = "O"
 elif player1 == "O":
     player2 = "X"
-#make sure to only enter symbols X and O 
+
+# Make sure only symbols X and O are entered
+
 while player1 != "X" and player1 != "O":
     print("Please choose either X or O") 
     player1 = input("Player 1, pick your Symbol: ").upper()
@@ -43,45 +48,55 @@ while player1 != "X" and player1 != "O":
         player2 = "X"
         break
     
-         
+
+# Let the game begin!         
 while won == False:  
-#pick position for player 1      
+    # Player 1 chooses position      
     placed1 = int(input(f"Player {player1}, place your symbol! ")) 
-    if placed1 not in range(1,10):
+    while placed1 not in range(1,10):
         print("Position must be a number between 1 and 9")
         placed1 = int(input(f"Player {player1}, place your symbol! "))
     turn += 1
-    board, free = place_symbol(board, placed1, player1)
-    if free == False: #if player trys to use a taken box, only ONE second chance  
+    board, free = place_symbol(board, placed1, player1) #place symbol at chosen position 
+    while free == False: #Insist on valid position
+
         placed1 = int(input(f"Player {player1}, place your symbol! ")) 
         if placed1 not in range(1,10):
             print("Position must be a number between 1 and 9")
             placed1 = int(input(f"Player {player1}, place your symbol! "))
         board, free = place_symbol(board, placed1, player1)
-#after every turn the updated board is printed 
-    print ("",board[0],"\n",board[1],"\n",board[2])
-    won = check_for_win(board)
+
+    
+    print ("",board[0],"\n",board[1],"\n",board[2]) #After every turn the updated board is printed 
+    won = check_for_win(board) #did this turn win the game?
     if won == True:
             print(f"Player {player1} has won!")
             break
-    elif won == False and turn == 9: #if no one won after turn 9 is a draw 
+    # If no one won after turn 9 it is a draw
+    elif won == False and turn == 9:  
         print ("It's a draw!")
         break
-    #pick position for player 2     
+    
+    #Player 2 picks position     
+
     placed2 = int(input(f"Player {player2}, place your symbol! "))
-    if placed2 not in range(1,10):
+    while placed2 not in range(1,10):
         print("Position must be a number between 1 and 9")
         placed2 = int(input(f"Player {player2}, place your symbol! "))
     turn += 1
-    board, free = place_symbol(board,placed2, player2)
-    if free == False: 
+
+    board, free = place_symbol(board,placed2, player2) #place symbol at chosen position
+    while free == False:  #Insist on valid position
+
         placed2 = int(input(f"Player {player2}, place your symbol! "))
         if placed2 not in range(1,10):
             print("Position must be a number between 1 and 9")
             placed2 = int(input(f"Player {player2}, place your symbol! "))
         board, free = place_symbol(board, placed2, player2)
     print ("",board[0],"\n",board[1],"\n",board[2])
-    won = check_for_win(board)
+
+    won = check_for_win(board) #did this turn win the game?
+
     if won == True:
             print(f"Player {player2} has won!")
             break
