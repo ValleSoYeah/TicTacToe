@@ -33,7 +33,9 @@ if player1 == "X":
     player2 = "O"
 elif player1 == "O":
     player2 = "X"
+
 # Make sure only symbols X and O are entered
+
 while player1 != "X" and player1 != "O":
     print("Please choose either X or O") 
     player1 = input("Player 1, pick your Symbol: ").upper()
@@ -76,15 +78,19 @@ while won == False:
         print("Position must be a number between 1 and 9")
         placed2 = int(input(f"Player {player2}, place your symbol! "))
     turn += 1
+
     board, free = place_symbol(board,placed2, player2) #place symbol at chosen position
     while free == False:  #Insist on valid position
+
         placed2 = int(input(f"Player {player2}, place your symbol! "))
         if placed2 not in range(1,10):
             print("Position must be a number between 1 and 9")
             placed2 = int(input(f"Player {player2}, place your symbol! "))
         board, free = place_symbol(board, placed2, player2)
     print ("",board[0],"\n",board[1],"\n",board[2])
+
     won = check_for_win(board) #did this turn win the game?
+
     if won == True:
             print(f"Player {player2} has won!")
             break
