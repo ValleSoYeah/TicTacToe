@@ -1,5 +1,5 @@
 def check_for_win(board):
-    '''Finds out if in our 3 x 3 array there is win and returns a boolean'''
+    '''Takes a 3 x 3 array as an argument and returns as a boolean whether someone has won'''
     for i in board: #checks for three same symbols in a row 
         if i.count("X") == 3 or i.count("O") == 3:
             return True
@@ -14,7 +14,7 @@ def check_for_win(board):
 
 
 def place_symbol(board, pos, symb): 
-    '''Replaces number at indicated index with the player symbol'''
+    '''takes as arguments a 3x3 array, a position on the board and the players symbol and returns wether the turn was valid and the eventually updated board'''
     if type(board[(pos-1)//3][(pos%3)-1]) == int: #checks for type at position 
         board[(pos-1)//3][(pos%3)-1] = symb #converts 1-9 position into array coordinates and replaces with player symbol 
     else:
@@ -23,7 +23,7 @@ def place_symbol(board, pos, symb):
     return board, True
 
 def play_turn(board, player):
-    '''Plays the turn for the specified player'''
+    '''Takes as arguemnts the board and the player's symbol, plays a turn and returns the updated board, as well as a boolean whether the turn won the game'''
     placed = int(input(f"Player {player}, place your symbol! ")) 
     while placed not in range(1,10):
         print("Position must be a number between 1 and 9")
@@ -40,14 +40,14 @@ def play_turn(board, player):
     return new_board, won
 
 def assign_symbols():            
-    '''Asks for user input and returns the two chosens symbols'''
+    '''Takes no argument. Asks for user input and returns the two chosens symbols'''
     sym1 = input("Player 1, pick your Symbol: ").upper()
     if sym1 == "X":
         sym2 = "O"
     elif sym1 == "O":
         sym2 = "X"
     
-    while sym1 != "X" and p1 != "O": # Make sure only symbols X and O are entered
+    while sym1 != "X" and sym1 != "O": # Make sure only symbols X and O are entered
         print("Please choose either X or O") 
         sym1 = input("Player 1, pick your Symbol: ").upper()
         if sym1 == "X":
