@@ -47,7 +47,7 @@ def assign_symbols():
     elif sym1 == "O":
         sym2 = "X"
     
-    while sym1 != "X" and p1 != "O": # Make sure only symbols X and O are entered
+    while sym1 != "X" and sym1 != "O": # Make sure only symbols X and O are entered
         print("Please choose either X or O") 
         sym1 = input("Player 1, pick your Symbol: ").upper()
         if sym1 == "X":
